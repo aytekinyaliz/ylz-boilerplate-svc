@@ -1,0 +1,41 @@
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "ylz-boilerplate-svc"
+  namespace: "default"
+  labels:
+    app: "ylz-boilerplate-svc"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: "ylz-boilerplate-svc"
+  template:
+    metadata:
+      labels:
+        app: "ylz-boilerplate-svc"
+    spec:
+      containers:
+        - name: "ylz-boilerplate-svc"
+          image: "gcr.io/ylz-xyz-infra/github.com/aytekinyaliz/ylz-boilerplate-svc:261cc7d"
+          env:
+            - name: "API_PREFIX"
+              valueFrom:
+                configMapKeyRef:
+                  key: "API_PREFIX"
+                  name: "ylz-boilerplate-svc-config-dd5r"
+            - name: "NODE_ENV"
+              valueFrom:
+                configMapKeyRef:
+                  key: "NODE_ENV"
+                  name: "ylz-boilerplate-svc-config-dd5r"
+            - name: "PORT"
+              valueFrom:
+                configMapKeyRef:
+                  key: "PORT"
+                  name: "ylz-boilerplate-svc-config-dd5r"
+            - name: "MONGO_URL"
+              valueFrom:
+                configMapKeyRef:
+                  key: "MONGO_URL"
+                  name: "ylz-boilerplate-svc-config-dd5r"

@@ -1,0 +1,9 @@
+{
+  "workbench.colorTheme": "Sublime VSCode Theme",
+  "debug.console.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "workbench.preferredHighContrastColorTheme": "Cobalt2",
+  "workbench.iconTheme": "material-icon-theme",
+  "editor.fontSize": 13
+}
