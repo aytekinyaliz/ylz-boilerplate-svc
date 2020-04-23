@@ -1,8 +1,9 @@
-import { Controller, Get, Param, Post, Body, Delete, Res, UsePipes, Logger, Put } from "@nestjs/common";
+import { Controller, Get, Param, Post, Body, Delete, Res, UsePipes, Logger, Put, HttpStatus } from "@nestjs/common";
 
 import { CourseDomain } from "../domains/CourseDomain";
 import { CreateInput, DeleteInput, GetInput, UpdateInput } from "./models";
-import { CourseValidationPipe } from "./pipes";
+import { CourseValidationPipe } from "../../../shared/pipes/pipes";
+import { ValidateObjectId } from "src/shared/pipes/ValidateObjectId";
 
 @Controller("courses")
 export class CourseController {
@@ -30,23 +31,25 @@ export class CourseController {
 
     const id = await this.courseDomain.create(course);
 
-    return res.status(201).json({ id });
+    return res.status(HttpStatus.CREATED).json({ id });
   }
 
   @Put(":id")
   @UsePipes(CourseValidationPipe)
-  async update(@Param() params: GetInput, @Body() course: UpdateInput, @Res() res) {
-    this.logger.debug("update: " + JSON.stringify(course));
+  async update(@Param("id", new ValidateObjectId()) id: string, @Body() course: UpdateInput, @Res() res) {
+    this.logger.debug("update: " + id + JSON.stringify(course));
 
-    await this.courseDomain.update({ ...params, ...course });
+    await this.courseDomain.update({ id, ...course });
 
-    return res.status(204).send();
+    return res.status(HttpStatus.NO_CONTENT).send();
   }
 
   @Delete(":id")
-  delete(@Param() params: DeleteInput) {
-    this.logger.debug("delete: " + JSON.stringify(params));
+  async delete(@Param("id", new ValidateObjectId()) id: string, @Res() res) {
+    this.logger.debug("delete: " + JSON.stringify(id));
 
-    return this.courseDomain.delete(params);
+    await this.courseDomain.delete({ id });
+
+    return res.status(HttpStatus.NO_CONTENT).send();
   }
 }
