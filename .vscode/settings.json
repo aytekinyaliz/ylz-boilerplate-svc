@@ -5,5 +5,6 @@
   "editor.formatOnPaste": true,
   "workbench.preferredHighContrastColorTheme": "Cobalt2",
   "workbench.iconTheme": "material-icon-theme",
-  "editor.fontSize": 13
+  "editor.fontSize": 14,
+  "editor.fontFamily": "'Dank Mono', Monaco, Menlo, 'Courier New', monospace"
 }

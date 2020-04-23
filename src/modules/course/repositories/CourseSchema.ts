@@ -1,7 +1,7 @@
 import { SchemaOptions } from "mongoose";
 import { BaseSchema } from "@ylz/data-access";
 
-export class CourseSchema extends BaseSchema {
+class CourseSchema extends BaseSchema {
   constructor(options?: SchemaOptions) {
     const definition = {
       title: {
@@ -38,3 +38,45 @@ export class CourseSchema extends BaseSchema {
     super(definition, options);
   }
 }
+
+/**
+ * Home Schema
+ */
+export const courseSchema = new CourseSchema({
+  collection: "Courses",
+  versionKey: false
+});
+
+/**
+ * Indicies
+ */
+courseSchema.index({ code: 1 }, { unique: true });
+
+/**
+ * Hooks
+ * - pre-save hook
+ * - validation
+ * - virtual
+ */
+courseSchema.post("save", function(doc: any, next: any) {
+  next();
+});
+
+/**
+ * Plugins
+ */
+// courseSchema.plugin(mongooseLeanVirtuals);
+
+/**
+ * Methods
+ */
+courseSchema.methods = {
+  // copyToMaterializedView
+};
+
+/**
+ * Statics
+ */
+courseSchema.statics = {
+  // copyToMaterializedView
+};
