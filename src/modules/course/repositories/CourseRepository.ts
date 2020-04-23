@@ -3,7 +3,6 @@ import { Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { BaseRepository } from "@ylz/data-access";
 
-import { courseModel } from "./CourseSchema";
 import { ICourseDocument } from "./ICourseDocument";
 import { IListInput, IGetInput, ICreateInput, IDeleteInput, IUpdateInput } from "./models";
 

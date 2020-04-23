@@ -1,8 +1,6 @@
 import { SchemaOptions, Model, model } from "mongoose";
 import { BaseSchema } from "@ylz/data-access";
 
-import { ICourseDocument } from "./ICourseDocument";
-
 class CourseSchema extends BaseSchema {
   constructor(options?: SchemaOptions) {
     const definition = {
