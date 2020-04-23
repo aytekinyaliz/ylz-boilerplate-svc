@@ -3,7 +3,7 @@ import { Injectable, Logger } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { BaseRepository } from "@ylz/data-access";
 
-// import courseModel from "./courseModel";
+import { courseModel } from "./CourseSchema";
 import { ICourseDocument } from "./ICourseDocument";
 import { IListInput, IGetInput, ICreateInput, IDeleteInput, IUpdateInput } from "./models";
 
@@ -14,6 +14,9 @@ export class CourseRepository extends BaseRepository<ICourseDocument> {
   constructor(@InjectModel("Course") private courseModel: Model<ICourseDocument>) {
     super(courseModel);
   }
+  // constructor() {
+  //   super(courseModel);
+  // }
 
   list(input?: IListInput): Promise<ICourseDocument[]> {
     this.logger.debug("list: " + JSON.stringify(input));

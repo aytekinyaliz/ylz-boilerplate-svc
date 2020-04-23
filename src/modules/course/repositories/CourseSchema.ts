@@ -1,5 +1,7 @@
-import { SchemaOptions } from "mongoose";
+import { SchemaOptions, Model, model } from "mongoose";
 import { BaseSchema } from "@ylz/data-access";
+
+import { ICourseDocument } from "./ICourseDocument";
 
 class CourseSchema extends BaseSchema {
   constructor(options?: SchemaOptions) {
@@ -42,7 +44,7 @@ class CourseSchema extends BaseSchema {
 /**
  * Home Schema
  */
-export const courseSchema = new CourseSchema({
+const courseSchema = new CourseSchema({
   collection: "Courses",
   versionKey: false
 });
@@ -79,4 +81,9 @@ courseSchema.methods = {
  */
 courseSchema.statics = {
   // copyToMaterializedView
+};
+
+export const courseModel = {
+  name: "Course",
+  schema: courseSchema
 };
