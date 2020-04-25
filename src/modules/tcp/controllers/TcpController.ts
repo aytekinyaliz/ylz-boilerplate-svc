@@ -4,8 +4,8 @@ import { Observable, of, from } from "rxjs";
 import { delay } from "rxjs/operators";
 
 @Controller()
-export class MessageController {
-  private logger = new Logger("MessageController");
+export class TcpController {
+  private logger = new Logger("TcpController");
 
   @MessagePattern({ cmd: "get-cumulative" })
   getCumulative(data: number[]): Observable<number> {

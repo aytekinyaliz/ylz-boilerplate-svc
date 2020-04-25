@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package grpcModule;
+
+// Declare a service for each controller you have
+service GrpcController {
+  // Declare an rpc for each method that is called via gRPC
+  rpc FindMax (NumberArray) returns (MaxOfNumberArray);
+}
+
+// Declare types used above
+message NumberArray {
+  repeated double data = 1;
+}
+message MaxOfNumberArray {
+  double sum = 1;
+}

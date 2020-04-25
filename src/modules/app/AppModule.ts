@@ -6,7 +6,8 @@ import { MongooseModule } from "@nestjs/mongoose";
 import configuration from "../../config";
 import { AppController } from "./controllers/AppController";
 import { CourseModule } from "../course/CourseModule";
-import { MessageModule } from "../message/MessageModule";
+import { TcpModule } from "../tcp/TcpModule";
+import { GrpcModule } from "../grpc/GrpcModule";
 
 const connectionOptions: ConnectionOptions = {
   poolSize: 20,
@@ -18,7 +19,8 @@ const connectionOptions: ConnectionOptions = {
 @Module({
   imports: [
     CourseModule, //
-    MessageModule,
+    TcpModule,
+    GrpcModule,
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     MongooseModule.forRoot(configuration().mongoUrl, connectionOptions)
   ],

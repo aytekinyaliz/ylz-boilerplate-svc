@@ -5,6 +5,7 @@ import { Transport } from "@nestjs/microservices";
 import * as compression from "compression";
 
 import { AppModule } from "./modules/app/AppModule";
+import { join } from "path";
 
 const logger = new Logger("Main");
 
@@ -12,13 +13,25 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
+  //#region [TCP, gRPC]
   app.connectMicroservice({
     transport: Transport.TCP,
     options: {
-      // host: "127.0.0.1",
-      port: process.env.MICROSERVICE_PORT
+      host: process.env.TCP_HOST,
+      port: process.env.TCP_PORT
     }
   });
+
+  console.log(join(__dirname, "../src/modules/grpc/protos/grpc.proto"));
+
+  app.connectMicroservice({
+    transport: Transport.GRPC,
+    options: {
+      package: "grpcModule",
+      protoPath: join(__dirname, "../src/modules/grpc/protos/grpc.proto")
+    }
+  });
+  //#endregion
 
   app.use(compression());
   app.useGlobalPipes(new ValidationPipe());
